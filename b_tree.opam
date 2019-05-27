@@ -1,0 +1,14 @@
+opam-version: "2.0"
+name: "b_tree"
+version: "0.0"
+synopsis: "A binary tree implementation in OCaml."
+description: synopsis
+maintainer: "thosakwe@gmail.com"
+authors: ["Tobe O"]
+homepage: "https://github.com/thosakwe/b_tree"
+bug-reports: "https://github.com/thosakwe/b_tree/issues"
+dev-repo: "git://github.com/thosakwe/b_tree.git"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
