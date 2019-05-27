@@ -104,7 +104,7 @@ let rec delete tree key =
       * is a right child. Replace E with F at E's parent.*)
   match tree with
     | Empty _ -> tree
-    | Leaf(k, v) -> if key = k then Empty k else tree
+    | Leaf(k, _) -> if key = k then Empty k else tree
     | Node(k, _, l, r) -> match (l, r) with
         | (None, None) -> Empty k
         | (Some left, None) -> delete left key
@@ -114,7 +114,7 @@ let rec delete tree key =
             match self with
               | Empty _ -> self
               | Leaf _ -> self
-              | Node(k, _, l, r) ->
+              | Node(_, _, l, _) ->
                   match l with
                     | None -> self
                     | Some left -> find_min left in

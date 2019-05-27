@@ -1,0 +1,3 @@
+(executables
+  (names demo)
+  (libraries linenoise b_tree str))
