@@ -8,6 +8,23 @@ type 'a b_tree =
   | Leaf of int * 'a
   | Node of int * 'a * 'a b_tree option * 'a b_tree option
 
+let rec length tree =
+  match tree with
+  | Empty _ -> 0
+  | Leaf _ -> 1
+  | Node(_, _, l, r) ->
+      let left_length =
+        match l with
+          | None -> 0
+          | Some left -> length left
+      in
+      let right_length =
+        match r with
+          | None -> 0
+          | Some right -> length right
+      in
+      1 + left_length + right_length
+
 (** Changes the key of a given tree. *)
 let with_key key tree =
   match tree with

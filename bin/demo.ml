@@ -8,13 +8,25 @@ let rec main tree =
             | "get" :: key_str :: _ ->
                 let key = int_of_string key_str in
                 let value = B_tree.search tree key in
-                print_endline (string_of_float value);
+                print_endline value;
                 main tree
-            | "set" :: key_str :: arg_str :: _ ->
+            | "set" :: key_str :: arg_str ->
                 let key = int_of_string key_str in
-                let arg = float_of_string arg_str in
+                let arg = String.concat " " arg_str in
                 let new_tree = B_tree.insert tree key arg in
+                print_endline ("Inserted " ^ (string_of_int key));
                 main new_tree
+            | "put" :: arg_str ->
+                let key = B_tree.length tree in
+                let new_tree = B_tree.insert tree key (String.concat " " arg_str) in
+                print_endline ("Inserted " ^ (string_of_int key));
+                main new_tree
+            | "list" :: _ ->
+                let visit (k, v) =
+                  print_endline ("Key " ^ (string_of_int k) ^ "=" ^ v)
+                in
+                B_tree.traverse visit tree;
+                main tree
             | ["quit"] -> ()
             | _ -> print_endline "Unknown command."; main tree
   with
